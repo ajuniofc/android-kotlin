@@ -11,7 +11,7 @@
 
         <include
             android:id="@+id/lista_transacoes_resumo"
-            layout="@layout/resumo_card" />
+            layout="@layout/card_resume" />
 
         <ListView
             android:id="@+id/lista_transacoes_listview"

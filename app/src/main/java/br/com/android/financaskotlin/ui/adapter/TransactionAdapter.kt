@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import br.com.android.financaskotlin.R
 import br.com.android.financaskotlin.model.Transaction
-import kotlinx.android.synthetic.main.transacao_item.view.*
+import kotlinx.android.synthetic.main.transaction_item.view.*
 import java.text.SimpleDateFormat
 
 /**
@@ -20,7 +20,7 @@ class TransactionAdapter(transactions: List<Transaction>,
     private val context = context
 
     override fun getView(poition: Int, view: View?, parent: ViewGroup?): View {
-        val view = LayoutInflater.from(context).inflate(R.layout.transacao_item, parent, false)
+        val view = LayoutInflater.from(context).inflate(R.layout.transaction_item, parent, false)
 
         val transaction = transactions[poition]
 

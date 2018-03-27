@@ -5,15 +5,15 @@ import android.support.v7.app.AppCompatActivity
 import br.com.android.financaskotlin.R
 import br.com.android.financaskotlin.model.Transaction
 import br.com.android.financaskotlin.ui.adapter.TransactionAdapter
-import kotlinx.android.synthetic.main.activity_lista_transacoes.*
+import kotlinx.android.synthetic.main.activity_transaction_list.*
 import java.math.BigDecimal
 import java.util.*
 
-class ListTransactionActivity : AppCompatActivity() {
+class TransactionListActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_lista_transacoes)
+        setContentView(R.layout.activity_transaction_list)
 
         val transactions = listOf(Transaction(BigDecimal(20.50),"Comida", Calendar.getInstance()),
                                   Transaction(BigDecimal(100.00), "Economia", Calendar.getInstance()))
