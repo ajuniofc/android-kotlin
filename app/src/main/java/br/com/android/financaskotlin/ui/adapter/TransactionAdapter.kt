@@ -6,9 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import br.com.android.financaskotlin.R
+import br.com.android.financaskotlin.extension.formatToBrazilian
 import br.com.android.financaskotlin.model.Transaction
 import kotlinx.android.synthetic.main.transaction_item.view.*
-import java.text.SimpleDateFormat
+
 
 /**
  * Created by JHUNIIN on 27/03/2018.
@@ -26,10 +27,8 @@ class TransactionAdapter(transactions: List<Transaction>,
 
         view.transacao_valor.text = transaction.value.toString()
         view.transacao_categoria.text = transaction.category
+        view.transacao_data.text = transaction.date.formatToBrazilian()
 
-        val format = SimpleDateFormat("dd/MM/yyy")
-        val formatedDate = format.format(transaction.date.time)
-        view.transacao_data.text = formatedDate
         return view
     }
 
