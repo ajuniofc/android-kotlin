@@ -22,7 +22,7 @@
                 android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
-                tools:src="@drawable/icone_transacao_item_despesa" />
+                tools:src="@drawable/ic_transaction_item_expense" />
 
             <LinearLayout
                 android:layout_width="0dp"
