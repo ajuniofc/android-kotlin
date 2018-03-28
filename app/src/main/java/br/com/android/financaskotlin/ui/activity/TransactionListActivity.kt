@@ -19,7 +19,7 @@ class TransactionListActivity : AppCompatActivity() {
         val transactions = listOf(Transaction(type = Type.EXPENSE, value = BigDecimal(20.50)),
                                   Transaction(BigDecimal(100.00), "Economia", Type.INCOME))
 
-        lista_transacoes_listview.setAdapter(TransactionAdapter(transactions, this))
+        lista_transacoes_listview.adapter = TransactionAdapter(transactions, this)
     }
 
 }
