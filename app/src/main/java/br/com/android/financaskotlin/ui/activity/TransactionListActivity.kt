@@ -1,7 +1,11 @@
 package br.com.android.financaskotlin.ui.activity
 
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import br.com.android.financaskotlin.R
 import br.com.android.financaskotlin.enum.Type
 import br.com.android.financaskotlin.extension.formatToBrazilian
@@ -22,6 +26,30 @@ class TransactionListActivity : AppCompatActivity() {
 
         setResume(transactions)
         setAdapter(transactions)
+
+        lista_transacoes_adiciona_receita
+                .setOnClickListener{
+
+                    val view = LayoutInflater.from(this).inflate(R.layout.transaction_form,
+                            window.decorView as ViewGroup,
+                            false)
+
+                    AlertDialog.Builder(this)
+                            .setTitle(R.string.add_income).setView(view).show()
+
+                }
+
+        lista_transacoes_adiciona_despesa
+                .setOnClickListener{
+
+                    val view = LayoutInflater.from(this).inflate(R.layout.transaction_form,
+                            window.decorView as ViewGroup,
+                            false)
+
+                    AlertDialog.Builder(this)
+                            .setTitle(R.string.add_expense).setView(view).show()
+
+                }
     }
 
     private fun setResume(transactions: List<Transaction>) {
