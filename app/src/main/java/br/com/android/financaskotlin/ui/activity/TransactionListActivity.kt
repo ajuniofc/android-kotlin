@@ -16,10 +16,17 @@ class TransactionListActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_transaction_list)
 
-        val transactions = listOf(Transaction(type = Type.EXPENSE, value = BigDecimal(20.50)),
-                                  Transaction(BigDecimal(100.00), "Economia", Type.INCOME))
+        val transactions: List<Transaction> = exampleList()
 
+        setAdapter(transactions)
+    }
+
+    private fun setAdapter(transactions: List<Transaction>) {
         lista_transacoes_listview.adapter = TransactionAdapter(transactions, this)
     }
+
+    private fun exampleList() = listOf(Transaction(type = Type.EXPENSE, value = BigDecimal(20.50)),
+            Transaction(BigDecimal(100.00), "Economia", Type.INCOME),
+            Transaction(BigDecimal(88.00), "Churras com os parças", Type.EXPENSE))
 
 }
