@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.transaction_item.view.*
 class TransactionAdapter(private val transactions: List<Transaction>,
                          private val context: Context) : BaseAdapter() {
 
-    private val maxLength = 14
+    private val maxLength = 11
 
     override fun getView(poition: Int, view: View?, parent: ViewGroup?): View {
         val view = LayoutInflater.from(context).inflate(R.layout.transaction_item, parent, false)
