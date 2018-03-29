@@ -27,9 +27,7 @@ class TransactionListActivity : AppCompatActivity() {
     private fun setResume(transactions: List<Transaction>) {
         val view = window.decorView
         val resumeView = ResumeView(this, view, transactions)
-        resumeView.addTotalIncome()
-        resumeView.addTotalExpense()
-        resumeView.addTotal()
+        resumeView.update()
     }
     private fun setAdapter(transactions: List<Transaction>) {
         lista_transacoes_listview.adapter = TransactionAdapter(transactions, this)

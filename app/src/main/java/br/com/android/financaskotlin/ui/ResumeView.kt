@@ -18,7 +18,7 @@ class ResumeView(private val context: Context,
     private val incomeColor = ContextCompat.getColor(context, R.color.income)
     private val expenseColor = ContextCompat.getColor(context, R.color.expense)
 
-    fun addTotalIncome() {
+    private fun addTotalIncome() {
         val total = resume.income()
         with(view.resumo_card_receita){
             setTextColor(incomeColor)
@@ -26,15 +26,15 @@ class ResumeView(private val context: Context,
         }
     }
 
-    fun addTotalExpense() {
-        val total = resume.expense()
+    private fun addTotalExpense() {
+        val total = resume.expense
         with(view.resumo_card_despesa){
             setTextColor(expenseColor)
             text = total.formatToBrazilian()
         }
     }
 
-    fun addTotal(){
+    private fun addTotal(){
         val total = resume.total()
         val color = colorBy(total)
         with(view.resumo_card_total){
@@ -48,6 +48,12 @@ class ResumeView(private val context: Context,
             return incomeColor
         }
         return expenseColor
+    }
+
+    fun update() {
+        addTotalIncome()
+        addTotalExpense()
+        addTotal()
     }
 
 }
