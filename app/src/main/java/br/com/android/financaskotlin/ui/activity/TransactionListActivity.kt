@@ -1,17 +1,15 @@
 package br.com.android.financaskotlin.ui.activity
 
 import android.app.DatePickerDialog
-import android.content.DialogInterface
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.DatePicker
 import android.widget.Toast
 import br.com.android.financaskotlin.R
+import br.com.android.financaskotlin.R.string.value
 import br.com.android.financaskotlin.enum.Type
 import br.com.android.financaskotlin.extension.formatToBrazilian
 import br.com.android.financaskotlin.model.Transaction
@@ -25,14 +23,13 @@ import java.util.*
 
 class TransactionListActivity : AppCompatActivity() {
 
+    private val transactions: MutableList<Transaction> = mutableListOf()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_transaction_list)
 
-        val transactions: List<Transaction> = exampleList()
-
-        setResume(transactions)
-        setAdapter(transactions)
+        uptdateTransactions()
 
         lista_transacoes_adiciona_receita
                 .setOnClickListener{
@@ -69,7 +66,12 @@ class TransactionListActivity : AppCompatActivity() {
                                         val textDate = view.form_transacao_data.text.toString()
                                         val textCategory = view.form_transacao_categoria.selectedItem.toString()
 
-                                        val value = BigDecimal(textValue)
+                                        val value = try {
+                                            BigDecimal(textValue)
+                                        }catch (e: NumberFormatException){
+                                            Toast.makeText(this, "Falha", Toast.LENGTH_SHORT).show()
+                                            BigDecimal.ZERO
+                                        }
 
                                         val brazilianFormat = SimpleDateFormat("dd/MM/yyyy")
                                         val convertDate = brazilianFormat.parse(textDate)
@@ -80,7 +82,9 @@ class TransactionListActivity : AppCompatActivity() {
                                         val transaction = Transaction(type = Type.INCOME, value = value,
                                                 date = date, category = textCategory)
 
-                                        Toast.makeText(this, transaction.category,Toast.LENGTH_SHORT).show()
+                                        transactions.add(transaction)
+                                        uptdateTransactions()
+                                        closeButton()
                                     })
                             .setNegativeButton("Cancelar", null)
                             .show()
@@ -100,17 +104,29 @@ class TransactionListActivity : AppCompatActivity() {
                 }
     }
 
-    private fun setResume(transactions: List<Transaction>) {
+    private fun closeButton() {
+        lista_transacoes_adiciona_menu.close(true)
+    }
+
+    private fun uptdateTransactions() {
+        setResume()
+        setAdapter()
+    }
+
+    private fun setResume() {
         val view = window.decorView
         val resumeView = ResumeView(this, view, transactions)
         resumeView.update()
     }
-    private fun setAdapter(transactions: List<Transaction>) {
+    private fun setAdapter() {
         lista_transacoes_listview.adapter = TransactionAdapter(transactions, this)
     }
 
-    private fun exampleList() = listOf(Transaction(type = Type.EXPENSE, value = BigDecimal(20.50)),
-            Transaction(BigDecimal(100.00), "Economia", Type.INCOME),
-            Transaction(BigDecimal(35.98), "Churras com os parças", Type.EXPENSE))
-
+    override fun onBackPressed() {
+        if (lista_transacoes_adiciona_menu.isOpened){
+            closeButton()
+        }else{
+            super.onBackPressed()
+        }
+    }
 }
